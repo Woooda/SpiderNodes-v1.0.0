@@ -1,0 +1,28 @@
+        /* Дополнительные стили для страницы контактов */
+        .contact-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-card {
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px;
+            width: 300px;
+        }
+
+        .contact-card h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .contact-card p {
+            color: #666;
+            font-size: 18px;
+            line-height: 1.6;
+        }

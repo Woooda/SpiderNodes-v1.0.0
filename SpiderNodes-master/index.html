@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpiderNodes</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5; /* Приближенный к белому цвет фона */
+            color: #ffffff; /* Цвет текста */
+            font-size: 22px; /* Увеличил размер шрифта для всего текста */
+        }
+        
+        .container {
+            position: relative;
+        }
+        
+        .img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            filter: brightness(40%);
+            transition: filter 0.5s ease; /* Добавляем переход для свойства filter */
+        }
+        
+        .img.dark {
+            filter: brightness(20%); /* Новое значение яркости для темного эффекта */
+        }
+        
+        
+        .content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+        
+        .navigate {
+            color: #00BFFF;
+            text-align: left;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        
+        
+        .navigation {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000; /* чтобы навигационное меню было поверх других элементов */
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .navigation a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 18px;
+            margin-right: 10px;
+        }
+        .navigation a:hover {
+            color: #673AB7;
+        }
+
+        .navigation a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #673AB7;
+            transform: scaleX(0);
+            transition: transform 0.3s;
+            transform-origin: 0 0;
+        }
+
+        .navigation a:hover::after {
+            transform: scaleX(1);
+        }
+        .container {
+            position: relative;
+        }
+        .protected{
+            font-size: 10px;
+            top: 200px;
+            text-shadow: 10px 10px 10px #8000ff;
+            opacity: 0.5;
+            transition: 0.2s ease
+        }
+        .protected:hover{
+            opacity: 1;
+        }
+        .text-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 18px;
+            border: 2px solid #00BFFF;
+            color: #00BFFF;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .button:hover {
+            background-color: #00BFFF;
+            color: white;
+        }
+        
+        .button.transparent {
+            background-color: transparent;
+            color: #00BFFF;
+        }
+        
+        .button.blue {
+            background-color: #00BFFF;
+            border-color: #00BFFF;
+            color: white;
+        }
+        
+        .button.blue:hover {
+            background-color: #008B8B;
+            border-color: #008B8B;
+        }
+        
+        /* Добавляем плавный переход */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Стили для раздела особенностей */
+        .features-section {
+            background-color: #ffffff;
+            padding: 50px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .feature {
+            margin-bottom: 30px;
+        }
+        
+        .feature h3 {
+            font-size: 24px;
+            color: #00BFFF;
+            margin-bottom: 10px;
+        }
+        
+        .feature p {
+            font-size: 18px;
+        }
+        
+        
+        
+        
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #FFC107;
+            margin-right: 10px;
+        }
+        
+        .titlelogo {
+            font-size: 20px;
+            color: rgb(255, 255, 255);
+        }
+        
+        .main {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            scroll-margin-top: 100px; /* Отступ перед началом прокрутки к якорю */
+        }
+        .main {
+            background-color: #ffffff; /* Цвет фона основной секции */
+            transition: background-color 0.5s; /* Плавный переход цвета фона */
+        }
+        
+        .main p {
+            font-size: 48px; /* Размер текста */
+            margin: 0;
+            color: white; /* Цвет текста */
+            background-color: rgb(255, 255, 255); /* Прозрачный фон */
+            padding: 20px; /* Поля вокруг текста */
+        }
+        
+        .text-main {
+            color: white;
+            font-size: 80px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .text-description {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .text-advantages {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .text-advantages ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .text-advantages li {
+            margin-bottom: 10px;
+            position: relative; /* Добавлено для позиционирования галочки */
+        }
+        
+        .checkmark {
+            position: absolute;
+            left: -20px; /* Расстояние от галочки до текста */
+            top: 2px; /* Выравнивание галочки по вертикали */
+            color: #00BFFF; /* Цвет галочки */
+            font-size: 18px; /* Размер галочки */
+        }
+        
+        .img::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%; /* Высота, которая будет затемнена */
+            background: linear-gradient(to bottom, rgb(255, 255, 255), rgb(255, 255, 255)); /* Градиент от прозрачного к полу-прозрачному черному */
+        }
+        
+        .img {
+            pointer-events: none; /* Отключаем события мыши для изображения */
+        }
+        
+        .text-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 10px; /* Добавил горизонтальные отступы между кнопками */
+            text-decoration: none;
+            font-size: 18px;
+            border: 2px solid #00BFFF;
+            color: #00BFFF;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .button:hover {
+            background-color: #00BFFF;
+            color: white;
+        }
+        
+        .button.transparent {
+            background-color: transparent;
+            color: #00BFFF;
+        }
+        
+        .button.blue {
+            background-color: #00BFFF;
+            border-color: #00BFFF;
+            color: white;
+        }
+        
+        .button.blue:hover {
+            background-color: #008B8B;
+            border-color: #008B8B;
+        }
+        
+        /* Добавляем плавный переход */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Стили для раздела особенностей */
+        .features-section {
+            background-color: #f5f5f5;
+            padding: 50px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .feature {
+            margin-bottom: 30px;
+        }
+        
+        .feature h3 {
+            font-size: 24px;
+            color: #00BFFF;
+            margin-bottom: 10px;
+        }
+        
+        .feature p {
+            font-size: 18px;
+        }
+        
+        .img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        
+        .color-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0);
+            transition: background-color 0.5s ease; /* плавный переход */
+            pointer-events: none;
+        }
+        .feature {
+            background-image: url('https://images.wallpaperscraft.ru/image/single/kosmos_otkrytyj_kosmos_planety_135213_1920x1080.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            margin: -5px;
+        }
+        
+        body{
+            overflow: hidden;
+        }
+        .editable-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        
+        .text-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .editable-textarea {
+            position: absolute;
+            resize: none;
+            border: none;
+            background: transparent;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        .idk{
+            margin-top: -500px;
+        }
+        .cookie-popup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease; /* добавлен переход для плавного изменения прозрачности */
+        }
+        
+        .cookie-content {
+            text-align: center;
+        }
+        
+        .cookie-content a {
+            color: #8A2BE2;
+            text-decoration: underline;
+        }
+        
+        #closeCookiePopup {
+            background-color: #8A2BE2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        #closeCookiePopup:hover {
+            background-color: #8A2BE2;
+        }
+        /* Стили для кнопки политики конфиденциальности */
+        .privacy-policy-btn {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          z-index: 1000;
+          transition: all 0.3s ease;
+          }
+          
+          .privacy-policy-btn button {
+          background-color: #e91e63;
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 16px;
+          transition: all 0.3s ease;
+          }
+          
+          .privacy-policy-btn button:hover {
+          background-color: #c2185b;
+          }
+          
+          /* Стили для уведомления о политике конфиденциальности */
+          .privacy-policy-popup {
+          display: none; /* Изначально скрыть блок */
+          position: fixed;
+          bottom: 60px;
+          right: 20px;
+          background-color: rgba(0, 0, 0, 0.8);
+          color: white;
+          padding: 20px;
+          border-radius: 10px;
+          z-index: 1000;
+          opacity: 0;
+          transition: opacity 0.5s ease;
+          }
+          
+          .privacy-policy-content {
+          text-align: center;
+          }
+          
+          .privacy-policy-content a {
+          color: #8A2BE2;
+          text-decoration: underline;
+          }
+          
+          #closePrivacyPolicyPopup {
+          background-color: #8A2BE2;
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 5px;
+          cursor: pointer;
+          margin-top: 10px;
+          transition: background-color 0.3s ease;
+          }
+          
+          #closePrivacyPolicyPopup:hover {
+          background-color: #8A2BE2;
+          }
+          /* Для устройств шириной до 600px */
+        @media screen and (max-width: 600px) {
+            .container {
+                padding: 10px; /* Уменьшаем отступы контейнера */
+            }
+        
+            .navigation {
+                top: 10px; /* Смещаем навигацию вверх */
+                right: 10px; /* Смещаем навигацию вправо */
+            }
+        
+            .text-overlay {
+                padding: 20px; /* Увеличиваем внутренние отступы для текста */
+            }
+        
+            .cookie-popup, .privacy-policy-popup {
+                bottom: 10px; /* Смещаем модальные окна вниз */
+                right: 10px; /* Смещаем модальные окна вправо */
+                padding: 10px; /* Уменьшаем отступы внутри модальных окон */
+            }
+        
+            .button {
+                font-size: 16px; /* Уменьшаем размер шрифта для кнопок */
+                padding: 8px 16px; /* Уменьшаем размер кнопок */
+            }
+        }
+        
+    </style>
+        <!-- Yandex.Metrika counter -->
+        <script type="text/javascript" >
+            (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        
+            ym(96689164, "init", {
+                clickmap:true,
+                trackLinks:true,
+                accurateTrackBounce:true,
+                webvisor:true
+            });
+        </script>
+        <noscript><div><img src="https://mc.yandex.ru/watch/96689164" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+        <!-- /Yandex.Metrika counter -->
+</head>
+<body>
+
+    <div class="container">
+        <img class="img" src="https://media.discordapp.net/attachments/1194709533306663004/1217787943968571443/1675497129_gas-kvas-com-p-fonovoi-risunok-na-rabochii-stol-na-ves-ek-6.png?ex=66054c67&is=65f2d767&hm=1c636b5f5b06dbe112a2cd0b7426e36c5925645352b3cd3869e7521da1407ef3&=&format=webp&quality=lossless&width=550&height=344" alt="Нам не удалось загрузить изображение :(">
+        <div class="content">
+            <div class="navigate">
+                <img class="logo" src="https://cdn.discordapp.com/attachments/1194709533306663004/1215633718149120030/d88954f47ef92703c5f96842d0bf2784.png?ex=65fd761f&is=65eb011f&hm=f744cf95de4d3c183d3cfca8496a74a8f3871c21aab9f0e9f02f2f930bda3522&" alt="Нам не удается загрузить изображение.">
+                <h1 class="titlelogo">SpiderNodes</h1>
+            </div>
+        </div>
+    </div>
+    <div class="navigation">
+        <a href="index.html">Главная</a>
+        <a href="plannes.html">Тарифы</a>
+        <a href="rewiews.html">Отзывы</a>
+
+    </div>
+    <div class="color-overlay"></div>
+
+    <div class="text-overlay">
+
+        <h1 class="text-main">Быстрый, безопасный хостинг</h1>
+        <p class="text-description">SpiderNodes - это надежный хостинг, который обеспечивает высокую скорость и безопасность для вашего дискорд бота.</p>
+        
+        <div class="text-advantages">
+            <ul>
+                <li><span class="checkmark">&#10003;</span> Мгновенное развертывание серверов</li>
+                <li><span class="checkmark">&#10003;</span> Мощная защита от DDoS атак</li>
+                <li><span class="checkmark">&#10003;</span> Самые лучшие цены на рынке</li>
+                <li><span class="checkmark">&#10003;</span> 24/7 поддержка пользователей</li>
+            </ul>
+        </div>
+
+        <div class="buttons">
+            <a href="https://discord.gg/gF2mFktU5e" class="button button-blue">Дискорд сервер</a>
+            <a href="plannes.html" class="button button-transparent">Посмотреть тарифы</a>
+        </div>
+        <p class="protected">SpiderNodes 2024</p>
+    <!-- Модальное окно с уведомлением о файлах cookie и политике конфиденциальности -->
+    <div class="cookie-popup" id="cookiePopup">
+        <div class="cookie-content">
+            <p>Мы используем файлы cookie для улучшения вашего опыта. <a href="cookie.html">Узнать больше</a>.</p>
+            <button id="closeCookiePopup">Принять</button>
+        </div>
+        <!-- Блок с окном политики конфиденциальности -->
+        <div class="privacy-policy-popup" id="privacyPolicyPopup">
+            <div class="privacy-policy-content">
+                <p>Прежде чем продолжить, пожалуйста, <a href="privacypolicy.html">ознакомьтесь с нашей политикой конфиденциальности</a>.</p>
+                <button id="closePrivacyPolicyPopup">Принять</button>
+            </div>
+        
+    </div>
+    </div>
+    <script src="./scripts/script.js"></script>
+</body>
+</html>

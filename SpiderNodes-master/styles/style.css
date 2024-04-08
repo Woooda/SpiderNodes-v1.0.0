@@ -1,0 +1,490 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5; /* Приближенный к белому цвет фона */
+    color: #ffffff; /* Цвет текста */
+    font-size: 22px; /* Увеличил размер шрифта для всего текста */
+}
+
+.container {
+    position: relative;
+}
+
+.img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    filter: brightness(40%);
+    transition: filter 0.5s ease; /* Добавляем переход для свойства filter */
+}
+
+.img.dark {
+    filter: brightness(20%); /* Новое значение яркости для темного эффекта */
+}
+
+
+.content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.navigate {
+    color: #00BFFF;
+    text-align: left;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+
+
+.navigation {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000; /* чтобы навигационное меню было поверх других элементов */
+    background-color: #00BFFF; /* полупрозрачный белый цвет фона */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.navigation a {
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.container {
+    position: relative;
+}
+.protected{
+    font-size: 10px;
+    top: 200px;
+    text-shadow: 10px 10px 10px #8000ff;
+    opacity: 0.5;
+    transition: 0.2s ease
+}
+.protected:hover{
+    opacity: 1;
+}
+.text-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 18px;
+    border: 2px solid #00BFFF;
+    color: #00BFFF;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background-color: #00BFFF;
+    color: white;
+}
+
+.button.transparent {
+    background-color: transparent;
+    color: #00BFFF;
+}
+
+.button.blue {
+    background-color: #00BFFF;
+    border-color: #00BFFF;
+    color: white;
+}
+
+.button.blue:hover {
+    background-color: #008B8B;
+    border-color: #008B8B;
+}
+
+/* Добавляем плавный переход */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Стили для раздела особенностей */
+.features-section {
+    background-color: #ffffff;
+    padding: 50px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.feature {
+    margin-bottom: 30px;
+}
+
+.feature h3 {
+    font-size: 24px;
+    color: #00BFFF;
+    margin-bottom: 10px;
+}
+
+.feature p {
+    font-size: 18px;
+}
+
+
+
+
+.logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #FFC107;
+    margin-right: 10px;
+}
+
+.titlelogo {
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+}
+
+.main {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    scroll-margin-top: 100px; /* Отступ перед началом прокрутки к якорю */
+}
+.main {
+    background-color: #ffffff; /* Цвет фона основной секции */
+    transition: background-color 0.5s; /* Плавный переход цвета фона */
+}
+
+.main p {
+    font-size: 48px; /* Размер текста */
+    margin: 0;
+    color: white; /* Цвет текста */
+    background-color: rgb(255, 255, 255); /* Прозрачный фон */
+    padding: 20px; /* Поля вокруг текста */
+}
+
+.text-main {
+    color: white;
+    font-size: 80px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.text-description {
+    margin-bottom: 20px;
+    text-align: center;
+}
+.text-advantages {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.text-advantages ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.text-advantages li {
+    margin-bottom: 10px;
+    position: relative; /* Добавлено для позиционирования галочки */
+}
+
+.checkmark {
+    position: absolute;
+    left: -20px; /* Расстояние от галочки до текста */
+    top: 2px; /* Выравнивание галочки по вертикали */
+    color: #00BFFF; /* Цвет галочки */
+    font-size: 18px; /* Размер галочки */
+}
+
+.img::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%; /* Высота, которая будет затемнена */
+    background: linear-gradient(to bottom, rgb(255, 255, 255), rgb(255, 255, 255)); /* Градиент от прозрачного к полу-прозрачному черному */
+}
+
+.img {
+    pointer-events: none; /* Отключаем события мыши для изображения */
+}
+
+.text-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 10px; /* Добавил горизонтальные отступы между кнопками */
+    text-decoration: none;
+    font-size: 18px;
+    border: 2px solid #00BFFF;
+    color: #00BFFF;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background-color: #00BFFF;
+    color: white;
+}
+
+.button.transparent {
+    background-color: transparent;
+    color: #00BFFF;
+}
+
+.button.blue {
+    background-color: #00BFFF;
+    border-color: #00BFFF;
+    color: white;
+}
+
+.button.blue:hover {
+    background-color: #008B8B;
+    border-color: #008B8B;
+}
+
+/* Добавляем плавный переход */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Стили для раздела особенностей */
+.features-section {
+    background-color: #f5f5f5;
+    padding: 50px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.feature {
+    margin-bottom: 30px;
+}
+
+.feature h3 {
+    font-size: 24px;
+    color: #00BFFF;
+    margin-bottom: 10px;
+}
+
+.feature p {
+    font-size: 18px;
+}
+
+.img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.color-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.5s ease; /* плавный переход */
+    pointer-events: none;
+}
+.feature {
+    background-image: url('https://images.wallpaperscraft.ru/image/single/kosmos_otkrytyj_kosmos_planety_135213_1920x1080.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    margin: -5px;
+}
+
+body{
+    overflow: hidden;
+}
+.editable-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.text-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.editable-textarea {
+    position: absolute;
+    resize: none;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+.idk{
+    margin-top: -500px;
+}
+.cookie-popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.5s ease; /* добавлен переход для плавного изменения прозрачности */
+}
+
+.cookie-content {
+    text-align: center;
+}
+
+.cookie-content a {
+    color: #8A2BE2;
+    text-decoration: underline;
+}
+
+#closeCookiePopup {
+    background-color: #8A2BE2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#closeCookiePopup:hover {
+    background-color: #8A2BE2;
+}
+/* Стили для кнопки политики конфиденциальности */
+.privacy-policy-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  }
+  
+  .privacy-policy-btn button {
+  background-color: #e91e63;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  }
+  
+  .privacy-policy-btn button:hover {
+  background-color: #c2185b;
+  }
+  
+  /* Стили для уведомления о политике конфиденциальности */
+  .privacy-policy-popup {
+  display: none; /* Изначально скрыть блок */
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  }
+  
+  .privacy-policy-content {
+  text-align: center;
+  }
+  
+  .privacy-policy-content a {
+  color: #8A2BE2;
+  text-decoration: underline;
+  }
+  
+  #closePrivacyPolicyPopup {
+  background-color: #8A2BE2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+  }
+  
+  #closePrivacyPolicyPopup:hover {
+  background-color: #8A2BE2;
+  }
+  /* Для устройств шириной до 600px */
+@media screen and (max-width: 600px) {
+    .container {
+        padding: 10px; /* Уменьшаем отступы контейнера */
+    }
+
+    .navigation {
+        top: 10px; /* Смещаем навигацию вверх */
+        right: 10px; /* Смещаем навигацию вправо */
+    }
+
+    .text-overlay {
+        padding: 20px; /* Увеличиваем внутренние отступы для текста */
+    }
+
+    .cookie-popup, .privacy-policy-popup {
+        bottom: 10px; /* Смещаем модальные окна вниз */
+        right: 10px; /* Смещаем модальные окна вправо */
+        padding: 10px; /* Уменьшаем отступы внутри модальных окон */
+    }
+
+    .button {
+        font-size: 16px; /* Уменьшаем размер шрифта для кнопок */
+        padding: 8px 16px; /* Уменьшаем размер кнопок */
+    }
+}
